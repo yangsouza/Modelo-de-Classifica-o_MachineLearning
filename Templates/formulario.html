@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Coleta de Dados</title>
+</head>
+<body>
+    
+    <h1>Formulário de Coleta de Dados</h1>
+    
+    <form id="myForm">
+        <label for="preg">Número de Gravidezes:</label>
+        <input type="number" id="preg" name="preg" required><br>
+
+        <label for="plas">Concentração de Glicose no Plasma:</label>
+        <input type="number" id="plas" name="plas" required><br>
+
+        <label for="pres">Pressão Sanguínea:</label>
+        <input type="number" id="pres" name="pres" required><br>
+
+        <label for="skin">Espessura da Pele:</label>
+        <input type="number" id="skin" name="skin" required><br>
+
+        <label for="test">Teste de Insulina:</label>
+        <input type="number" id="test" name="test" required><br>
+
+        <label for="mass">Índice de Massa Corporal (IMC):</label>
+        <input type="number" id="mass" name="mass" required><br>
+
+        <label for="pedi">Função Pedigrí:</label>
+        <input type="number" id="pedi" name="pedi" required><br>
+
+        <label for="age">Idade:</label>
+        <input type="number" id="age" name="age" required><br>
+
+        <label for="class">Classe:</label>
+        <select id="class" name="class" required>
+            <option value="0">Sem Diabetes</option>
+            <option value="1">Com Diabetes</option>
+        </select><br>
+
+        <button type="submit" value="Enviar">Enviar</button>
+    </form>
+    <div class="response-container">
+        <h3>Resposta da API</h3>
+        <p id="responseMessage"></p>
+    </div>
+
+    <script>
+        document.getElementById("myForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+    
+            // Obter dados do formulário
+            const formData = new FormData(this);
+            
+            // Converte os dados do formulário para um objeto JSON
+            const jsonData = {};
+            formData.forEach((value, key) => {
+                jsonData[key] = value;
+            });
+    
+            // Enviar requisição POST para a API
+            fetch('/prever_diabetes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Processar a resposta da API
+                document.getElementById("responseMessage").textContent = "Resposta da API: " + JSON.stringify(data);
+            })
+            .catch(error => {
+                // Tratar erros
+                document.getElementById("responseMessage").textContent = "Erro: " + error.message;
+            });
+        });
+    </script>
+    
+</body>
+</html>
