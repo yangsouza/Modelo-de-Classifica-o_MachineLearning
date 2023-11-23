@@ -22,7 +22,10 @@ Clone este repositório para o seu ambiente local:
 bash
 Copy code
 git clone https://github.com/yangsouza/Modelo-de-Classifica-o_MachineLearning.git
+
 cd Modelo-de-Classifica-o_MachineLearning
+
+
 Abra a sua IDE preferida e execute os comandos fornecidos no script Python do exemplo. Certifique-se de ter o Scikit-Learn instalado em seu ambiente.
 bash
 Copy code
